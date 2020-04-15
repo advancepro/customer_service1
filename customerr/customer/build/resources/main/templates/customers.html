@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Customers</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body style="margin-left: 20px; margin-top: 20px; margin-right: 20px;">
+<h3 style="text-align: center"> Your Customers List</h3>
+<div th:unless="${#lists.isEmpty(customers)}">
+    <dl th:each="customer : ${customers}">
+        <table style="width:100%">
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Email</th>
+                <th>Job Title</th>
+                <th>Mobile Phone</th>
+                <th>City</th>
+                <th>Web Page</th>
+            </tr>
+            <tr>
+                <td><span th:text="${customer.firstName}">First Name</span></td>
+                <td><span th:text="${customer.lastName}">Last Name</span></td>
+                <td><span th:text="${customer.emailAddress}">Email Address</span></td>
+                <td><span th:text="${customer.jobTitle}">Job Title</span></td>
+                <td><span th:text="${customer.mobilePhone}">Mobile Phone</span></td>
+                <td><span th:text="${customer.city}">City</span></td>
+                <td><span th:text="${customer.webPage}">Web Page</span></td>
+            </tr>
+        </table>
+    </dl>
+</div>
+
+<div th:if="${#lists.isEmpty(customers)}">
+    <p>There are no customers yet.</p>
+</div>
+<div style="text-align: center">
+    <form th:action="@{/customers/login}" style="margin-bottom: 10px">
+        <input type="submit" value="Sign Out"/>
+    </form>
+
+    <form th:action="@{/customers/add}">
+        <input type="submit" value="Add New Customer"/>
+    </form>
+</div>
+
+
+</body>
+</html>
